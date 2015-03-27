@@ -5,7 +5,6 @@ public class TestAll {
 		// start the server
 		System.out.println("Starting Server...");
 		new Thread(new Runnable() {
-			@Override
 			public void run() {
 				Server.main(null);
 
@@ -16,7 +15,6 @@ public class TestAll {
 		System.out.println("Starting Client Connection...");
 		for (int i = 0; i < 10; i++) {
 			new Thread(new Runnable() {
-				@Override
 				public void run() {
 					Client.main(null);
 				}

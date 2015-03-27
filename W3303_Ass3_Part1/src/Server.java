@@ -2,8 +2,6 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.concurrent.Callable;
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
@@ -25,11 +23,10 @@ public class Server {
 
 			while (findClients) {
 
-				Socket clientSocket = socket.accept();
+				final Socket clientSocket = socket.accept();
 				Future<Integer> result = executor
 						.submit(new Callable<Integer>() {
 
-							@Override
 							public Integer call() throws Exception {
 								return new ClientConnection(clientSocket,
 										idCount++).run();
@@ -38,6 +35,7 @@ public class Server {
 				futureStack.add(result);
 				
 				//TODO: print exec times
+				
 			}
 
 			socket.close();
@@ -52,14 +50,14 @@ public class Server {
 
 	// from user nosid
 	// http://stackoverflow.com/questions/23301598/transform-java-future-into-a-completablefuture
-	public static <T> CompletableFuture<T> makeCompletableFuture(
-			Future<T> future) {
-		return CompletableFuture.supplyAsync(() -> {
-			try {
-				return future.get();
-			} catch (InterruptedException | ExecutionException e) {
-				throw new RuntimeException(e);
-			}
-		});
-	}
+//	public static <T> CompletableFuture<T> makeCompletableFuture(
+//			Future<T> future) {
+//		return CompletableFuture.supplyAsync(() -> {
+//			try {
+//				return future.get();
+//			} catch (InterruptedException | ExecutionException e) {
+//				throw new RuntimeException(e);
+//			}
+//		});
+//	}
 }

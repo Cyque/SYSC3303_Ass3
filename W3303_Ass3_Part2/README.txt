@@ -1,5 +1,5 @@
 
-Authors: Nate Bosscher, Damian Poland
+Authors: Nate Bosscher, Damian Polan
 
 Compilation & Run: execute the following unix commands.
 
